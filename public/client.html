@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+    <head>
+        <!---- LINKS ---->
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link href='https://fonts.googleapis.com/css?family=Gochi+Hand' rel='stylesheet' type='text/css'>
+        <script src="script/socket.io.js"></script>
+
+        <script>
+        // var socket = io();
+        // var myToken, myStream;
+        // var dataPack = {};
+        // var socketReady = false;
+        // var testBox;
+
+        // window.addEventListener('load',function(){
+
+        //     //init
+        //     setTimeout(function(){
+        //         myToken = socket.id;
+        //         socketReady = true;
+
+        //         //Token_Ready!!_Then_Setup_Socket_KeyWord//
+        //         socket.on( myToken, function(stream){
+        //         //alert("hi");
+        //         testBox.innerHTML += stream;
+        //         });
+
+        //     },100);
+
+        //     testBox = document.getElementById('testBox');
+
+
+        // });
+
+        // //registration_for_server_position
+        // socket.on('testType', function(){
+        //     socket.emit('newArtist','');
+        // });
+
+        // //receive_data_stream
+
+        // // socket.on( "test", function(stream){
+        // //     testBox.innerHTML += stream;
+        // // });
+
+
+        // document.onkeydown=function(event){
+        //     if(socketReady){
+        //             var e = event || window.event || arguments.callee.caller.arguments[0];
+        //             myStream = e.keyCode;
+
+        //             dataPack = {
+        //                 token : myToken,
+        //                 stream : myStream
+        //             }
+
+        //             socket.emit('frame', dataPack);
+
+        //             console.log(dataPack);
+
+        //         }
+        //     }; 
+        
+        </script>
+
+        <script type="text/javascript">
+
+            var context;
+            var canvas;
+            var myvideo;
+
+        // These help with cross-browser functionality (shim)
+        window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
+
+        var reqAnimFrame = window.mozRequestAnimationFrame    ||
+                       window.webkitRequestAnimationFrame ||
+                       window.msRequestAnimationFrame     ||
+                       window.onRequestAnimationFrame
+                       ;
+        
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+
+            function init(){
+                console.log("we are in init");
+                myvideo = document.getElementById("thevideo");
+
+                if (navigator.getUserMedia) {
+                    console.log("in navigator.getUserMedia");
+                    navigator.getUserMedia({video: true},
+                        function(stream) {
+                            console.log("Got success callback");
+                            myvideo.src = window.URL.createObjectURL(stream) || stream;
+                            myvideo.play();
+                        },
+                        function(error) {
+                            console.log("ERRRRRRRRR");                  
+                        });
+                }
+
+                canvas = document.getElementById('drawbox');
+                context = canvas.getContext('2d');
+
+                draw();
+            }
+
+            function draw() {
+                context.drawImage(myvideo, 0, 0);
+                console.log(canvas.toDataURL());
+                reqAnimFrame(draw);
+            }
+
+            window.addEventListener('load', init);
+        </script>
+    
+    </head>
+
+    <body>
+
+        <!--div>
+        You Can Remove "testBox" div After Testing
+        For Testing: Type AnyTing Runtime
+        Rubin
+        <div-->
+        <!--<div id = "testBox" >
+        </div>-->
+
+        <div class="main">
+        <header>
+            <h1>Drawing on Everyone</h1>
+        </header>
+
+        <div id="drawbox">
+            <video id="thevideo" height="" width="500"></video>
+            <!--<canvas id="mycanvas" width="600" height=""/>-->
+        </div><!--close drawbox-->
+
+        <div class="button">
+            Send
+        </div><!--close button-->
+
+        <div id="gallery">
+            <h2>Drawings on me</h2>
+
+            <ul id="gallerylist">
+                <li class="mypics">
+                </li>
+            </ul>
+        </div><!--close gallery-->
+    </div><!--close main-->
+
+    </body>
+</html>

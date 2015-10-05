@@ -1,0 +1,607 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'code-art' ]
+2 info using npm@2.5.1
+3 info using node@v0.12.1
+4 warn package.json socket-chat-example@0.0.1 No repository field.
+5 warn package.json socket-chat-example@0.0.1 No README data
+6 silly cache add args [ 'code-art', null ]
+7 verbose cache add spec code-art
+8 silly cache add parsed spec { raw: 'code-art',
+8 silly cache add   scope: null,
+8 silly cache add   name: 'code-art',
+8 silly cache add   rawSpec: '',
+8 silly cache add   spec: '*',
+8 silly cache add   type: 'range' }
+9 verbose addNamed code-art@*
+10 silly addNamed semver.valid null
+11 silly addNamed semver.validRange *
+12 silly addNameRange { name: 'code-art', range: '*', hasData: false }
+13 silly mapToRegistry name code-art
+14 silly mapToRegistry using default registry
+15 silly mapToRegistry registry https://registry.npmjs.org/
+16 silly mapToRegistry uri https://registry.npmjs.org/code-art
+17 verbose addNameRange registry:https://registry.npmjs.org/code-art not in flight; fetching
+18 verbose request uri https://registry.npmjs.org/code-art
+19 verbose request no auth needed
+20 info attempt registry request try #1 at 7:36:57 AM
+21 verbose request id 80f6f0a8498bd577
+22 http request GET https://registry.npmjs.org/code-art
+23 http 200 https://registry.npmjs.org/code-art
+24 silly get cb [ 200,
+24 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+24 silly get     etag: '"GXZ6C3TIOIM9JWHX6ZPGXAEY"',
+24 silly get     'content-type': 'application/json',
+24 silly get     'cache-control': 'max-age=60',
+24 silly get     'content-length': '3532',
+24 silly get     'accept-ranges': 'bytes',
+24 silly get     date: 'Sun, 04 Oct 2015 11:36:58 GMT',
+24 silly get     via: '1.1 varnish',
+24 silly get     age: '0',
+24 silly get     connection: 'keep-alive',
+24 silly get     'x-served-by': 'cache-jfk1021-JFK',
+24 silly get     'x-cache': 'MISS',
+24 silly get     'x-cache-hits': '0',
+24 silly get     'x-timer': 'S1443958618.517604,VS0,VE94',
+24 silly get     vary: 'Accept' } ]
+25 verbose get saving code-art to /Users/rubin/.npm/registry.npmjs.org/code-art/.cache.json
+26 silly addNameRange number 2 { name: 'code-art', range: '*', hasData: true }
+27 silly addNameRange versions [ 'code-art', [ '0.0.0', '0.1.0' ] ]
+28 verbose addNamed code-art@0.1.0
+29 silly addNamed semver.valid 0.1.0
+30 silly addNamed semver.validRange 0.1.0
+31 silly mapToRegistry name code-art
+32 silly mapToRegistry using default registry
+33 silly mapToRegistry registry https://registry.npmjs.org/
+34 silly mapToRegistry uri https://registry.npmjs.org/code-art
+35 verbose addRemoteTarball https://registry.npmjs.org/code-art/-/code-art-0.1.0.tgz not in flight; adding
+36 verbose addRemoteTarball [ 'https://registry.npmjs.org/code-art/-/code-art-0.1.0.tgz',
+36 verbose addRemoteTarball   'ea557c045d01066d8675c969ba1ab192917dd816' ]
+37 info retry fetch attempt 1 at 7:36:57 AM
+38 info attempt registry request try #1 at 7:36:57 AM
+39 http fetch GET https://registry.npmjs.org/code-art/-/code-art-0.1.0.tgz
+40 http fetch 200 https://registry.npmjs.org/code-art/-/code-art-0.1.0.tgz
+41 silly fetchAndShaCheck shasum ea557c045d01066d8675c969ba1ab192917dd816
+42 verbose addTmpTarball /var/folders/v2/d7tg5tmn5k10q_pbbzx_xccr0000gn/T/npm-7703-0d88457c/registry.npmjs.org/code-art/-/code-art-0.1.0.tgz not in flight; adding
+43 verbose addTmpTarball already have metadata; skipping unpack for code-art@0.1.0
+44 silly cache afterAdd code-art@0.1.0
+45 verbose afterAdd /Users/rubin/.npm/code-art/0.1.0/package/package.json not in flight; writing
+46 verbose afterAdd /Users/rubin/.npm/code-art/0.1.0/package/package.json written
+47 silly install resolved [ { name: 'code-art',
+47 silly install resolved     version: '0.1.0',
+47 silly install resolved     description: 'create blocky modern art from code',
+47 silly install resolved     main: 'index.js',
+47 silly install resolved     directories: { example: 'example' },
+47 silly install resolved     dependencies: { canvas: '~0.13.1', falafel: '0.1.3' },
+47 silly install resolved     repository: { type: 'git', url: 'git://github.com/substack/code-art.git' },
+47 silly install resolved     homepage: 'https://github.com/substack/code-art',
+47 silly install resolved     keywords: [ 'art', 'code', 'ast', 'canvas', 'bauhaus' ],
+47 silly install resolved     author:
+47 silly install resolved      { name: 'James Halliday',
+47 silly install resolved        email: 'mail@substack.net',
+47 silly install resolved        url: 'http://substack.net' },
+47 silly install resolved     license: 'MIT',
+47 silly install resolved     readme: '# code-art\n\nCreate blocky modern art from code.\n\n# example\n\n``` js\nvar art = require(\'code-art\');\nvar fs = require(\'fs\');\n\nvar src = fs.readFileSync(__dirname + \'/../index.js\', \'utf8\');\nvar ws = fs.createWriteStream(__dirname + \'/outline.png\');\n\nvar colors = {\n    FunctionExpression : [\n        \'rgb(240,240,40)\', \'rgb(40,240,40)\', \'rgb(40,40,240)\', \'rgb(240,40,40)\'\n    ],\n    Program : \'rgb(240,40,40)\'\n};\n\nart(src, { colors : colors, height : 4, width: 2 }) .pipe(ws);\n```\n\n![outline](http://substack.net/images/outline.png)\n\n# methods\n\n``` js\nvar art = require(\'code-art\')\n```\n\n## art(src, opts)\n\n`opts.colors` should be a function `fn(node)` that returns color strings or\narrays of colors or `opts.colors` can be an object that maps\n[esprima](http://esprima.org/) node types to strings or arrays of colors.\n\nWhen the resulting object lookup or function call for `opts.colors` is an array,\nan element from the array will be selected based on how many parents of the node\nshare the same node type, modulo the length of the array.\n\n`opts.width` is the width to use for each character, default 6.\n\n`opts.height` is the height to use for each character, default 12.\n\nIf `src` is an Array, render each source item from left to right with\n`opts.padding` of separation.\n\n# install\n\nWith [npm](http://npmjs.org) do:\n\n```\nnpm install code-art\n```\n\n# license\n\nMIT\n',
+47 silly install resolved     _id: 'code-art@0.1.0',
+47 silly install resolved     dist:
+47 silly install resolved      { shasum: 'ea557c045d01066d8675c969ba1ab192917dd816',
+47 silly install resolved        tarball: 'http://registry.npmjs.org/code-art/-/code-art-0.1.0.tgz' },
+47 silly install resolved     _npmVersion: '1.1.59',
+47 silly install resolved     _npmUser: { name: 'substack', email: 'mail@substack.net' },
+47 silly install resolved     maintainers: [ [Object] ],
+47 silly install resolved     _shasum: 'ea557c045d01066d8675c969ba1ab192917dd816',
+47 silly install resolved     _resolved: 'https://registry.npmjs.org/code-art/-/code-art-0.1.0.tgz',
+47 silly install resolved     _from: 'code-art@*' } ]
+48 info install code-art@0.1.0 into /Users/rubin/Desktop/lw/drawing
+49 info installOne code-art@0.1.0
+50 verbose installOne of code-art to /Users/rubin/Desktop/lw/drawing not in flight; installing
+51 verbose lock using /Users/rubin/.npm/_locks/code-art-80eb8234cb7f3f02.lock for /Users/rubin/Desktop/lw/drawing/node_modules/code-art
+52 silly install write writing code-art 0.1.0 to /Users/rubin/Desktop/lw/drawing/node_modules/code-art
+53 silly cache addNamed cb code-art@0.1.0
+54 verbose unbuild node_modules/code-art
+55 verbose gentlyRm vacuuming /Users/rubin/Desktop/lw/drawing/node_modules/code-art
+56 verbose tar unpack /Users/rubin/.npm/code-art/0.1.0/package.tgz
+57 verbose tar unpacking to /Users/rubin/Desktop/lw/drawing/node_modules/code-art
+58 verbose gentlyRm vacuuming /Users/rubin/Desktop/lw/drawing/node_modules/code-art
+59 silly gunzTarPerm modes [ '755', '644' ]
+60 silly gunzTarPerm extractEntry package.json
+61 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+62 silly gunzTarPerm extractEntry .npmignore
+63 silly gunzTarPerm modified mode [ '.npmignore', 438, 420 ]
+64 silly gunzTarPerm extractEntry LICENSE
+65 silly gunzTarPerm modified mode [ 'LICENSE', 438, 420 ]
+66 silly gunzTarPerm extractEntry index.js
+67 silly gunzTarPerm modified mode [ 'index.js', 438, 420 ]
+68 silly gunzTarPerm extractEntry example/outline.js
+69 silly gunzTarPerm modified mode [ 'example/outline.js', 438, 420 ]
+70 silly gunzTarPerm extractEntry example/multi.js
+71 silly gunzTarPerm modified mode [ 'example/multi.js', 438, 420 ]
+72 silly gunzTarPerm extractEntry example/multi/a.js
+73 silly gunzTarPerm modified mode [ 'example/multi/a.js', 438, 420 ]
+74 silly gunzTarPerm extractEntry example/multi/b.js
+75 silly gunzTarPerm modified mode [ 'example/multi/b.js', 438, 420 ]
+76 silly gunzTarPerm extractEntry example/multi/c.js
+77 silly gunzTarPerm modified mode [ 'example/multi/c.js', 438, 420 ]
+78 silly gunzTarPerm extractEntry readme.markdown
+79 silly gunzTarPerm modified mode [ 'readme.markdown', 438, 420 ]
+80 info preinstall code-art@0.1.0
+81 silly prepareForInstallMany adding canvas@~0.13.1 from code-art dependencies
+82 silly prepareForInstallMany adding falafel@0.1.3 from code-art dependencies
+83 silly cache add args [ 'canvas@~0.13.1', null ]
+84 verbose cache add spec canvas@~0.13.1
+85 silly cache add args [ 'falafel@0.1.3', null ]
+86 verbose cache add spec falafel@0.1.3
+87 silly cache add parsed spec { raw: 'canvas@~0.13.1',
+87 silly cache add   scope: null,
+87 silly cache add   name: 'canvas',
+87 silly cache add   rawSpec: '~0.13.1',
+87 silly cache add   spec: '>=0.13.1 <0.14.0',
+87 silly cache add   type: 'range' }
+88 verbose addNamed canvas@>=0.13.1 <0.14.0
+89 silly addNamed semver.valid null
+90 silly addNamed semver.validRange >=0.13.1 <0.14.0
+91 silly addNameRange { name: 'canvas', range: '>=0.13.1 <0.14.0', hasData: false }
+92 silly mapToRegistry name canvas
+93 silly mapToRegistry using default registry
+94 silly mapToRegistry registry https://registry.npmjs.org/
+95 silly mapToRegistry uri https://registry.npmjs.org/canvas
+96 verbose addNameRange registry:https://registry.npmjs.org/canvas not in flight; fetching
+97 silly cache add parsed spec { raw: 'falafel@0.1.3',
+97 silly cache add   scope: null,
+97 silly cache add   name: 'falafel',
+97 silly cache add   rawSpec: '0.1.3',
+97 silly cache add   spec: '0.1.3',
+97 silly cache add   type: 'version' }
+98 verbose addNamed falafel@0.1.3
+99 silly addNamed semver.valid 0.1.3
+100 silly addNamed semver.validRange 0.1.3
+101 silly mapToRegistry name falafel
+102 silly mapToRegistry using default registry
+103 silly mapToRegistry registry https://registry.npmjs.org/
+104 silly mapToRegistry uri https://registry.npmjs.org/falafel
+105 verbose addNameVersion registry:https://registry.npmjs.org/falafel not in flight; fetching
+106 verbose request uri https://registry.npmjs.org/canvas
+107 verbose request no auth needed
+108 info attempt registry request try #1 at 7:36:57 AM
+109 http request GET https://registry.npmjs.org/canvas
+110 verbose request uri https://registry.npmjs.org/falafel
+111 verbose request no auth needed
+112 info attempt registry request try #1 at 7:36:57 AM
+113 http request GET https://registry.npmjs.org/falafel
+114 http 200 https://registry.npmjs.org/canvas
+115 silly get cb [ 200,
+115 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+115 silly get     etag: '"2CLU9W5YI8G9A3DFKVCS7J0EK"',
+115 silly get     'content-type': 'application/json',
+115 silly get     'cache-control': 'max-age=60',
+115 silly get     'content-length': '77579',
+115 silly get     'accept-ranges': 'bytes',
+115 silly get     date: 'Sun, 04 Oct 2015 11:36:58 GMT',
+115 silly get     via: '1.1 varnish',
+115 silly get     age: '0',
+115 silly get     connection: 'keep-alive',
+115 silly get     'x-served-by': 'cache-jfk1029-JFK',
+115 silly get     'x-cache': 'MISS',
+115 silly get     'x-cache-hits': '0',
+115 silly get     'x-timer': 'S1443958618.798063,VS0,VE18',
+115 silly get     vary: 'Accept' } ]
+116 verbose get saving canvas to /Users/rubin/.npm/registry.npmjs.org/canvas/.cache.json
+117 silly addNameRange number 2 { name: 'canvas', range: '>=0.13.1 <0.14.0', hasData: true }
+118 silly addNameRange versions [ 'canvas',
+118 silly addNameRange   [ '0.0.1',
+118 silly addNameRange     '0.0.2',
+118 silly addNameRange     '0.0.3',
+118 silly addNameRange     '0.0.4',
+118 silly addNameRange     '0.0.5',
+118 silly addNameRange     '0.0.6',
+118 silly addNameRange     '0.0.7',
+118 silly addNameRange     '0.0.8',
+118 silly addNameRange     '0.1.0',
+118 silly addNameRange     '0.2.0',
+118 silly addNameRange     '0.2.1',
+118 silly addNameRange     '0.3.0',
+118 silly addNameRange     '0.3.1',
+118 silly addNameRange     '0.3.2',
+118 silly addNameRange     '0.3.3',
+118 silly addNameRange     '0.4.0',
+118 silly addNameRange     '0.4.1',
+118 silly addNameRange     '0.4.2',
+118 silly addNameRange     '0.4.3',
+118 silly addNameRange     '0.5.0',
+118 silly addNameRange     '0.5.1',
+118 silly addNameRange     '0.5.2',
+118 silly addNameRange     '0.5.3',
+118 silly addNameRange     '0.5.4',
+118 silly addNameRange     '0.6.0',
+118 silly addNameRange     '0.7.0',
+118 silly addNameRange     '0.7.1',
+118 silly addNameRange     '0.7.2',
+118 silly addNameRange     '0.7.3',
+118 silly addNameRange     '0.8.0',
+118 silly addNameRange     '0.8.1',
+118 silly addNameRange     '0.8.2',
+118 silly addNameRange     '0.8.3',
+118 silly addNameRange     '0.9.0',
+118 silly addNameRange     '0.10.0',
+118 silly addNameRange     '0.10.1',
+118 silly addNameRange     '0.10.2',
+118 silly addNameRange     '0.10.3',
+118 silly addNameRange     '0.11.0',
+118 silly addNameRange     '0.11.1',
+118 silly addNameRange     '0.11.2',
+118 silly addNameRange     '0.11.3',
+118 silly addNameRange     '0.12.0',
+118 silly addNameRange     '0.12.1',
+118 silly addNameRange     '0.13.0',
+118 silly addNameRange     '0.13.1',
+118 silly addNameRange     '1.0.0',
+118 silly addNameRange     '1.0.1',
+118 silly addNameRange     '1.0.2',
+118 silly addNameRange     '1.0.3',
+118 silly addNameRange     '1.0.4',
+118 silly addNameRange     '1.1.0',
+118 silly addNameRange     '1.1.1',
+118 silly addNameRange     '1.1.2',
+118 silly addNameRange     '1.1.3',
+118 silly addNameRange     '1.1.4',
+118 silly addNameRange     '1.1.5',
+118 silly addNameRange     '1.1.6',
+118 silly addNameRange     '1.2.0',
+118 silly addNameRange     '1.2.1',
+118 silly addNameRange     '1.2.2',
+118 silly addNameRange     '1.2.3',
+118 silly addNameRange     '1.2.4',
+118 silly addNameRange     '1.2.5',
+118 silly addNameRange     '1.2.6',
+118 silly addNameRange     '1.2.7',
+118 silly addNameRange     '1.2.8',
+118 silly addNameRange     '1.2.9' ] ]
+119 verbose addNamed canvas@0.13.1
+120 silly addNamed semver.valid 0.13.1
+121 silly addNamed semver.validRange 0.13.1
+122 silly mapToRegistry name canvas
+123 silly mapToRegistry using default registry
+124 silly mapToRegistry registry https://registry.npmjs.org/
+125 silly mapToRegistry uri https://registry.npmjs.org/canvas
+126 verbose addRemoteTarball https://registry.npmjs.org/canvas/-/canvas-0.13.1.tgz not in flight; adding
+127 verbose addRemoteTarball [ 'https://registry.npmjs.org/canvas/-/canvas-0.13.1.tgz',
+127 verbose addRemoteTarball   '97d62dd8f18aa5e8c79496660625434e6785fcff' ]
+128 info retry fetch attempt 1 at 7:36:57 AM
+129 info attempt registry request try #1 at 7:36:57 AM
+130 http fetch GET https://registry.npmjs.org/canvas/-/canvas-0.13.1.tgz
+131 http 200 https://registry.npmjs.org/falafel
+132 silly get cb [ 200,
+132 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+132 silly get     etag: '"DN50RQJTJ28U6HWNZSNGBVF14"',
+132 silly get     'content-type': 'application/json',
+132 silly get     'cache-control': 'max-age=60',
+132 silly get     'content-length': '25677',
+132 silly get     'accept-ranges': 'bytes',
+132 silly get     date: 'Sun, 04 Oct 2015 11:36:58 GMT',
+132 silly get     via: '1.1 varnish',
+132 silly get     age: '0',
+132 silly get     connection: 'keep-alive',
+132 silly get     'x-served-by': 'cache-jfk1030-JFK',
+132 silly get     'x-cache': 'HIT',
+132 silly get     'x-cache-hits': '1',
+132 silly get     'x-timer': 'S1443958618.801263,VS0,VE90',
+132 silly get     vary: 'Accept' } ]
+133 verbose get saving falafel to /Users/rubin/.npm/registry.npmjs.org/falafel/.cache.json
+134 silly mapToRegistry name falafel
+135 silly mapToRegistry using default registry
+136 silly mapToRegistry registry https://registry.npmjs.org/
+137 silly mapToRegistry uri https://registry.npmjs.org/falafel
+138 verbose addRemoteTarball https://registry.npmjs.org/falafel/-/falafel-0.1.3.tgz not in flight; adding
+139 verbose addRemoteTarball [ 'https://registry.npmjs.org/falafel/-/falafel-0.1.3.tgz',
+139 verbose addRemoteTarball   'becb2f558f6548543cf0db6f89569f766d5c96ac' ]
+140 info retry fetch attempt 1 at 7:36:57 AM
+141 info attempt registry request try #1 at 7:36:57 AM
+142 http fetch GET https://registry.npmjs.org/falafel/-/falafel-0.1.3.tgz
+143 http fetch 200 https://registry.npmjs.org/canvas/-/canvas-0.13.1.tgz
+144 http fetch 200 https://registry.npmjs.org/falafel/-/falafel-0.1.3.tgz
+145 silly fetchAndShaCheck shasum becb2f558f6548543cf0db6f89569f766d5c96ac
+146 verbose addTmpTarball /var/folders/v2/d7tg5tmn5k10q_pbbzx_xccr0000gn/T/npm-7703-0d88457c/registry.npmjs.org/falafel/-/falafel-0.1.3.tgz not in flight; adding
+147 verbose addTmpTarball already have metadata; skipping unpack for falafel@0.1.3
+148 silly cache afterAdd falafel@0.1.3
+149 verbose afterAdd /Users/rubin/.npm/falafel/0.1.3/package/package.json not in flight; writing
+150 verbose afterAdd /Users/rubin/.npm/falafel/0.1.3/package/package.json written
+151 silly fetchAndShaCheck shasum 97d62dd8f18aa5e8c79496660625434e6785fcff
+152 verbose addTmpTarball /var/folders/v2/d7tg5tmn5k10q_pbbzx_xccr0000gn/T/npm-7703-0d88457c/registry.npmjs.org/canvas/-/canvas-0.13.1.tgz not in flight; adding
+153 verbose addTmpTarball already have metadata; skipping unpack for canvas@0.13.1
+154 silly cache afterAdd canvas@0.13.1
+155 verbose afterAdd /Users/rubin/.npm/canvas/0.13.1/package/package.json not in flight; writing
+156 verbose afterAdd /Users/rubin/.npm/canvas/0.13.1/package/package.json written
+157 silly install resolved [ { name: 'falafel',
+157 silly install resolved     description: 'transform the ast on a recursive walk',
+157 silly install resolved     version: '0.1.3',
+157 silly install resolved     repository:
+157 silly install resolved      { type: 'git',
+157 silly install resolved        url: 'git://github.com/substack/node-falafel.git' },
+157 silly install resolved     main: 'index.js',
+157 silly install resolved     keywords: [ 'ast', 'source', 'traversal', 'syntax', 'tree', 'burrito' ],
+157 silly install resolved     directories: { example: 'example', test: 'test' },
+157 silly install resolved     scripts: { test: 'tap test/*.js' },
+157 silly install resolved     dependencies: { esprima: '~0.9.9' },
+157 silly install resolved     devDependencies: { tap: '~0.2.4' },
+157 silly install resolved     engines: { node: '>=0.4.0' },
+157 silly install resolved     license: 'MIT',
+157 silly install resolved     author:
+157 silly install resolved      { name: 'James Halliday',
+157 silly install resolved        email: 'mail@substack.net',
+157 silly install resolved        url: 'http://substack.net' },
+157 silly install resolved     _id: 'falafel@0.1.3',
+157 silly install resolved     dist:
+157 silly install resolved      { shasum: 'becb2f558f6548543cf0db6f89569f766d5c96ac',
+157 silly install resolved        tarball: 'http://registry.npmjs.org/falafel/-/falafel-0.1.3.tgz' },
+157 silly install resolved     maintainers: [ [Object] ],
+157 silly install resolved     _shasum: 'becb2f558f6548543cf0db6f89569f766d5c96ac',
+157 silly install resolved     _resolved: 'https://registry.npmjs.org/falafel/-/falafel-0.1.3.tgz',
+157 silly install resolved     _from: 'falafel@0.1.3' },
+157 silly install resolved   { name: 'canvas',
+157 silly install resolved     description: 'Canvas graphics API backed by Cairo',
+157 silly install resolved     version: '0.13.1',
+157 silly install resolved     author: { name: 'TJ Holowaychuk', email: 'tj@learnboost.com' },
+157 silly install resolved     keywords:
+157 silly install resolved      [ 'canvas',
+157 silly install resolved        'graphic',
+157 silly install resolved        'graphics',
+157 silly install resolved        'pixman',
+157 silly install resolved        'cairo',
+157 silly install resolved        'image',
+157 silly install resolved        'images',
+157 silly install resolved        'pdf' ],
+157 silly install resolved     homepage: 'https://github.com/learnboost/node-canvas',
+157 silly install resolved     repository: { type: 'git', url: 'git://github.com/learnboost/node-canvas' },
+157 silly install resolved     scripts: { test: 'make test', install: 'node-gyp rebuild' },
+157 silly install resolved     devDependencies:
+157 silly install resolved      { express: '>= 2.3.7 && < 3.0.0',
+157 silly install resolved        jade: '0.11.0',
+157 silly install resolved        mocha: '*',
+157 silly install resolved        should: '*' },
+157 silly install resolved     engines: { node: '>= 0.4.0' },
+157 silly install resolved     main: './lib/canvas.js',
+157 silly install resolved     gypfile: true,
+157 silly install resolved     _id: 'canvas@0.13.1',
+157 silly install resolved     dist:
+157 silly install resolved      { shasum: '97d62dd8f18aa5e8c79496660625434e6785fcff',
+157 silly install resolved        tarball: 'http://registry.npmjs.org/canvas/-/canvas-0.13.1.tgz' },
+157 silly install resolved     maintainers: [ [Object] ],
+157 silly install resolved     directories: {},
+157 silly install resolved     _shasum: '97d62dd8f18aa5e8c79496660625434e6785fcff',
+157 silly install resolved     _resolved: 'https://registry.npmjs.org/canvas/-/canvas-0.13.1.tgz',
+157 silly install resolved     _from: 'canvas@>=0.13.1 <0.14.0' } ]
+158 info install falafel@0.1.3 into /Users/rubin/Desktop/lw/drawing/node_modules/code-art
+159 info install canvas@0.13.1 into /Users/rubin/Desktop/lw/drawing/node_modules/code-art
+160 info installOne falafel@0.1.3
+161 verbose installOne of falafel to /Users/rubin/Desktop/lw/drawing/node_modules/code-art not in flight; installing
+162 info installOne canvas@0.13.1
+163 verbose installOne of canvas to /Users/rubin/Desktop/lw/drawing/node_modules/code-art not in flight; installing
+164 verbose lock using /Users/rubin/.npm/_locks/falafel-e7b0dbc7c30e9643.lock for /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules/falafel
+165 verbose lock using /Users/rubin/.npm/_locks/canvas-e8570a772bc97c41.lock for /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules/canvas
+166 silly install write writing falafel 0.1.3 to /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules/falafel
+167 silly install write writing canvas 0.13.1 to /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules/canvas
+168 silly cache addNamed cb falafel@0.1.3
+169 verbose unbuild node_modules/code-art/node_modules/falafel
+170 silly cache addNamed cb canvas@0.13.1
+171 verbose unbuild node_modules/code-art/node_modules/canvas
+172 verbose gentlyRm vacuuming /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules/falafel
+173 verbose gentlyRm vacuuming /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules/canvas
+174 verbose tar unpack /Users/rubin/.npm/falafel/0.1.3/package.tgz
+175 verbose tar unpacking to /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules/falafel
+176 verbose gentlyRm vacuuming /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules/falafel
+177 verbose tar unpack /Users/rubin/.npm/canvas/0.13.1/package.tgz
+178 verbose tar unpacking to /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules/canvas
+179 verbose gentlyRm vacuuming /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules/canvas
+180 silly gunzTarPerm modes [ '755', '644' ]
+181 silly gunzTarPerm modes [ '755', '644' ]
+182 silly gunzTarPerm extractEntry package.json
+183 silly gunzTarPerm extractEntry package.json
+184 silly gunzTarPerm extractEntry index.js
+185 silly gunzTarPerm extractEntry example/prompt.js
+186 silly gunzTarPerm extractEntry .npmignore
+187 silly gunzTarPerm extractEntry index.js
+188 silly gunzTarPerm extractEntry lib/bindings.js
+189 silly gunzTarPerm extractEntry lib/canvas.js
+190 silly gunzTarPerm extractEntry example/array.js
+191 silly gunzTarPerm extractEntry test/async.js
+192 silly gunzTarPerm extractEntry lib/context2d.js
+193 silly gunzTarPerm extractEntry lib/image.js
+194 silly gunzTarPerm extractEntry test/for.js
+195 silly gunzTarPerm extractEntry test/parent.js
+196 silly gunzTarPerm extractEntry lib/jpegstream.js
+197 silly gunzTarPerm extractEntry lib/pixelarray.js
+198 silly gunzTarPerm extractEntry test/array.js
+199 silly gunzTarPerm extractEntry .travis.yml
+200 silly gunzTarPerm extractEntry lib/pngstream.js
+201 silly gunzTarPerm extractEntry History.md
+202 silly gunzTarPerm extractEntry README.markdown
+203 silly gunzTarPerm extractEntry .gitmodules
+204 silly gunzTarPerm extractEntry install
+205 silly gunzTarPerm extractEntry .travis.yml
+206 silly gunzTarPerm extractEntry Makefile
+207 silly gunzTarPerm extractEntry out.pdf
+208 info preinstall falafel@0.1.3
+209 silly gunzTarPerm extractEntry out.png
+210 silly prepareForInstallMany adding esprima@~0.9.9 from falafel dependencies
+211 silly cache add args [ 'esprima@~0.9.9', null ]
+212 verbose cache add spec esprima@~0.9.9
+213 silly cache add parsed spec { raw: 'esprima@~0.9.9',
+213 silly cache add   scope: null,
+213 silly cache add   name: 'esprima',
+213 silly cache add   rawSpec: '~0.9.9',
+213 silly cache add   spec: '>=0.9.9 <0.10.0',
+213 silly cache add   type: 'range' }
+214 verbose addNamed esprima@>=0.9.9 <0.10.0
+215 silly addNamed semver.valid null
+216 silly addNamed semver.validRange >=0.9.9 <0.10.0
+217 silly addNameRange { name: 'esprima', range: '>=0.9.9 <0.10.0', hasData: false }
+218 silly mapToRegistry name esprima
+219 silly mapToRegistry using default registry
+220 silly mapToRegistry registry https://registry.npmjs.org/
+221 silly mapToRegistry uri https://registry.npmjs.org/esprima
+222 verbose addNameRange registry:https://registry.npmjs.org/esprima not in flight; fetching
+223 silly gunzTarPerm extractEntry binding.gyp
+224 silly gunzTarPerm extractEntry Readme.md
+225 verbose request uri https://registry.npmjs.org/esprima
+226 verbose request no auth needed
+227 info attempt registry request try #1 at 7:36:58 AM
+228 verbose etag "760IOOBWKG7YX9EI2TP5KMCAI"
+229 http request GET https://registry.npmjs.org/esprima
+230 silly gunzTarPerm extractEntry src/color.h
+231 silly gunzTarPerm extractEntry src/Canvas.cc
+232 silly gunzTarPerm extractEntry src/CanvasGradient.cc
+233 silly gunzTarPerm extractEntry src/CanvasGradient.h
+234 silly gunzTarPerm extractEntry src/CanvasPattern.cc
+235 silly gunzTarPerm extractEntry src/CanvasPattern.h
+236 silly gunzTarPerm extractEntry src/CanvasRenderingContext2d.cc
+237 silly gunzTarPerm extractEntry src/CanvasRenderingContext2d.h
+238 silly gunzTarPerm extractEntry src/closure.h
+239 silly gunzTarPerm extractEntry src/color.cc
+240 silly gunzTarPerm extractEntry src/Canvas.h
+241 silly gunzTarPerm extractEntry src/Image.cc
+242 silly gunzTarPerm extractEntry src/Image.h
+243 silly gunzTarPerm extractEntry src/ImageData.cc
+244 silly gunzTarPerm extractEntry src/ImageData.h
+245 silly gunzTarPerm extractEntry src/init.cc
+246 silly gunzTarPerm extractEntry src/JPEGStream.h
+247 silly gunzTarPerm extractEntry src/PixelArray.cc
+248 http 200 https://registry.npmjs.org/esprima
+249 silly get cb [ 200,
+249 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+249 silly get     etag: '"AVSCUW57SRTFITAKH26IJ4XIX"',
+249 silly get     'content-type': 'application/json',
+249 silly get     'cache-control': 'max-age=60',
+249 silly get     'content-length': '58651',
+249 silly get     'accept-ranges': 'bytes',
+249 silly get     date: 'Sun, 04 Oct 2015 11:36:59 GMT',
+249 silly get     via: '1.1 varnish',
+249 silly get     age: '26',
+249 silly get     connection: 'keep-alive',
+249 silly get     'x-served-by': 'cache-jfk1024-JFK',
+249 silly get     'x-cache': 'HIT',
+249 silly get     'x-cache-hits': '1',
+249 silly get     'x-timer': 'S1443958619.145441,VS0,VE0',
+249 silly get     vary: 'Accept' } ]
+250 verbose get saving esprima to /Users/rubin/.npm/registry.npmjs.org/esprima/.cache.json
+251 silly gunzTarPerm extractEntry src/PixelArray.h
+252 silly addNameRange number 2 { name: 'esprima', range: '>=0.9.9 <0.10.0', hasData: true }
+253 silly addNameRange versions [ 'esprima',
+253 silly addNameRange   [ '0.7.0',
+253 silly addNameRange     '0.8.0',
+253 silly addNameRange     '0.8.1',
+253 silly addNameRange     '0.8.2',
+253 silly addNameRange     '0.9.0',
+253 silly addNameRange     '0.9.1',
+253 silly addNameRange     '0.9.2',
+253 silly addNameRange     '0.9.3',
+253 silly addNameRange     '0.9.4',
+253 silly addNameRange     '0.9.5',
+253 silly addNameRange     '0.9.6',
+253 silly addNameRange     '0.9.7',
+253 silly addNameRange     '0.9.8',
+253 silly addNameRange     '0.9.9',
+253 silly addNameRange     '1.0.0',
+253 silly addNameRange     '1.0.1',
+253 silly addNameRange     '1.0.2',
+253 silly addNameRange     '1.0.3',
+253 silly addNameRange     '1.0.4',
+253 silly addNameRange     '1.1.0',
+253 silly addNameRange     '1.1.1',
+253 silly addNameRange     '1.2.0',
+253 silly addNameRange     '1.2.1',
+253 silly addNameRange     '1.2.2',
+253 silly addNameRange     '1.2.3',
+253 silly addNameRange     '1.2.4',
+253 silly addNameRange     '2.0.0',
+253 silly addNameRange     '1.2.5',
+253 silly addNameRange     '2.1.0',
+253 silly addNameRange     '2.2.0',
+253 silly addNameRange     '2.3.0',
+253 silly addNameRange     '2.4.0',
+253 silly addNameRange     '2.4.1',
+253 silly addNameRange     '2.5.0',
+253 silly addNameRange     '2.6.0' ] ]
+254 verbose addNamed esprima@0.9.9
+255 silly addNamed semver.valid 0.9.9
+256 silly addNamed semver.validRange 0.9.9
+257 silly mapToRegistry name esprima
+258 silly mapToRegistry using default registry
+259 silly mapToRegistry registry https://registry.npmjs.org/
+260 silly mapToRegistry uri https://registry.npmjs.org/esprima
+261 verbose addRemoteTarball https://registry.npmjs.org/esprima/-/esprima-0.9.9.tgz not in flight; adding
+262 verbose addRemoteTarball [ 'https://registry.npmjs.org/esprima/-/esprima-0.9.9.tgz',
+262 verbose addRemoteTarball   '1b90925c975d632d7282939c3bb9c3a423c30490' ]
+263 info retry fetch attempt 1 at 7:36:58 AM
+264 info attempt registry request try #1 at 7:36:58 AM
+265 http fetch GET https://registry.npmjs.org/esprima/-/esprima-0.9.9.tgz
+266 silly gunzTarPerm extractEntry src/Point.h
+267 silly gunzTarPerm extractEntry util/has_lib.sh
+268 http fetch 200 https://registry.npmjs.org/esprima/-/esprima-0.9.9.tgz
+269 info preinstall canvas@0.13.1
+270 silly install resolved []
+271 verbose about to build /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules/canvas
+272 info build /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules/canvas
+273 verbose linkStuff [ false,
+273 verbose linkStuff   false,
+273 verbose linkStuff   false,
+273 verbose linkStuff   '/Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules' ]
+274 info linkStuff canvas@0.13.1
+275 verbose linkBins canvas@0.13.1
+276 verbose linkMans canvas@0.13.1
+277 verbose rebuildBundles canvas@0.13.1
+278 info install canvas@0.13.1
+279 verbose unsafe-perm in lifecycle true
+280 silly fetchAndShaCheck shasum 1b90925c975d632d7282939c3bb9c3a423c30490
+281 verbose addTmpTarball /var/folders/v2/d7tg5tmn5k10q_pbbzx_xccr0000gn/T/npm-7703-0d88457c/registry.npmjs.org/esprima/-/esprima-0.9.9.tgz not in flight; adding
+282 verbose addTmpTarball already have metadata; skipping unpack for esprima@0.9.9
+283 verbose about to build /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules/falafel
+284 verbose unlock done using /Users/rubin/.npm/_locks/falafel-e7b0dbc7c30e9643.lock for /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules/falafel
+285 info canvas@0.13.1 Failed to exec install script
+286 verbose unlock done using /Users/rubin/.npm/_locks/canvas-e8570a772bc97c41.lock for /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules/canvas
+287 verbose about to build /Users/rubin/Desktop/lw/drawing/node_modules/code-art
+288 verbose unlock done using /Users/rubin/.npm/_locks/code-art-80eb8234cb7f3f02.lock for /Users/rubin/Desktop/lw/drawing/node_modules/code-art
+289 verbose stack Error: EACCES, mkdir '/Users/rubin/.npm/esprima/0.9.9'
+289 verbose stack     at Error (native)
+290 verbose cwd /Users/rubin/Desktop/lw/drawing
+291 error Darwin 14.3.0
+292 error argv "node" "/usr/local/bin/npm" "install" "code-art"
+293 error node v0.12.1
+294 error npm  v2.5.1
+295 error path /Users/rubin/.npm/esprima/0.9.9
+296 error code EACCES
+297 error errno -13
+298 error Error: EACCES, mkdir '/Users/rubin/.npm/esprima/0.9.9'
+298 error     at Error (native)
+298 error  { [Error: EACCES, mkdir '/Users/rubin/.npm/esprima/0.9.9']
+298 error   errno: -13,
+298 error   code: 'EACCES',
+298 error   path: '/Users/rubin/.npm/esprima/0.9.9',
+298 error   parent: 'falafel' }
+299 error Please try running this command again as root/Administrator.
+300 verbose exit [ -13, true ]
+301 verbose unbuild node_modules/code-art/node_modules/falafel
+302 info preuninstall falafel@0.1.3
+303 info uninstall falafel@0.1.3
+304 verbose unbuild rmStuff falafel@0.1.3 from /Users/rubin/Desktop/lw/drawing/node_modules
+305 verbose unbuild rmStuff in /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules
+306 info postuninstall falafel@0.1.3
+307 verbose gentlyRm vacuuming /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules/falafel
+308 silly gentlyRm purging /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules/falafel
+309 silly gentlyRm quitting because other entries in /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules
+310 verbose unbuild node_modules/code-art/node_modules/canvas
+311 info preuninstall canvas@0.13.1
+312 info uninstall canvas@0.13.1
+313 verbose unbuild rmStuff canvas@0.13.1 from /Users/rubin/Desktop/lw/drawing/node_modules
+314 verbose unbuild rmStuff in /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules
+315 info postuninstall canvas@0.13.1
+316 verbose gentlyRm vacuuming /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules/canvas
+317 silly gentlyRm purging /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules/canvas
+318 silly gentlyRm removing /Users/rubin/Desktop/lw/drawing/node_modules/code-art/node_modules
+319 silly gentlyRm quitting because other entries in /Users/rubin/Desktop/lw/drawing/node_modules/code-art
+320 verbose unbuild node_modules/code-art
+321 info preuninstall code-art@0.1.0
+322 info uninstall code-art@0.1.0
+323 verbose unbuild rmStuff code-art@0.1.0 from /Users/rubin/Desktop/lw/drawing/node_modules
+324 info postuninstall code-art@0.1.0
+325 verbose gentlyRm vacuuming /Users/rubin/Desktop/lw/drawing/node_modules/code-art
+326 silly gentlyRm purging /Users/rubin/Desktop/lw/drawing/node_modules/code-art
+327 silly gentlyRm quitting because other entries in /Users/rubin/Desktop/lw/drawing/node_modules
