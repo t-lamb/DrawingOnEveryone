@@ -108,3 +108,6 @@ header {
 .button:hover {
 	background-color: #2dc0bd;
 }
+video {
+	display: none;
+}

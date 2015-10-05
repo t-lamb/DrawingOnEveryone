@@ -69,6 +69,8 @@
             var context;
             var canvas;
             var myvideo;
+            var points = [];
+            var mousePress = false;
 
         // These help with cross-browser functionality (shim)
         window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
@@ -98,17 +100,41 @@
                         });
                 }
 
-                canvas = document.getElementById('drawbox');
+                canvas = document.getElementById('mycanvas');
+                canvas.addEventListener('mousedown', function() {
+                    mousePress = true;
+                });
+
+                canvas.addEventListener('mouseup', function(){
+                    mousePress = false;
+                });
+
+                canvas.addEventListener('mousemove', function(e){
+                    if(mousePress){
+                        console.log(e)
+                        points.push({x: e.clientX, y: e.clientY});
+                   }
+                 });
+                
                 context = canvas.getContext('2d');
+
+                function draw() {
+                    context.drawImage(myvideo, 0, 0);
+                    //console.log(canvas.toDataURL());
+
+                    for (var i = 0; i < points.length; i++) {
+                        context.fillRect(points[i].x, points[i].y, 10, 10);
+                    }
+                    reqAnimFrame(draw);
+                }
 
                 draw();
             }
 
-            function draw() {
-                context.drawImage(myvideo, 0, 0);
-                console.log(canvas.toDataURL());
-                reqAnimFrame(draw);
-            }
+            
+
+
+
 
             window.addEventListener('load', init);
         </script>
@@ -131,8 +157,8 @@
         </header>
 
         <div id="drawbox">
-            <video id="thevideo" height="" width="500"></video>
-            <!--<canvas id="mycanvas" width="600" height=""/>-->
+            <video id="thevideo" height="500" width="667"></video>
+            <canvas id="mycanvas" height="500" width="667"/>
         </div><!--close drawbox-->
 
         <div class="button">
