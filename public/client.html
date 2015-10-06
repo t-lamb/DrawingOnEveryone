@@ -59,6 +59,8 @@
             var mousePress = false;
             var canvasRect;
             var imageScreen;
+            var px = 0;
+            var py = 0; 
 
         //set colors
             var r = 255 * Math.random();
@@ -138,10 +140,18 @@
 
 
                     for (var i = 0; i < points.length; i++) {
+
                         context.beginPath();
-                        context.arc(points[i].x, points[i].y, 5, 0, 2 * Math.PI, false);
-                        context.fillStyle = color;
-                        context.fill();
+                        context.strokeStyle = color;
+                        context.moveTo(px, py);
+                        context.lineTo(points[i].x,points[i].y);
+                        context.stroke();
+                        //context.arc(points[i].x, points[i].y, 5, 0, 2 * Math.PI, false);
+                        //context.fillStyle = color;
+                        //context.fill();
+
+                        px = points[i].x;
+                        py = points[i].y;
                     }
 
                     if(socketReady){
