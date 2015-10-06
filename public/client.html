@@ -71,21 +71,34 @@
             var myvideo;
             var points = [];
             var mousePress = false;
+            var canvasRect;
 
-        // These help with cross-browser functionality (shim)
-        window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
+        //set colors
+            var r = 255 * Math.random();
+            var g = 255 * Math.random();
+            var b = 255 * Math.random();
+            var color = "rgb(" + Math.floor(r) + "," + Math.floor(g) + "," + Math.floor(b) + ")";
+            console.log("Color: " + color);
 
-        var reqAnimFrame = window.mozRequestAnimationFrame    ||
-                       window.webkitRequestAnimationFrame ||
-                       window.msRequestAnimationFrame     ||
-                       window.onRequestAnimationFrame
-                       ;
-        
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+        // shim for cross-browser functionality
+            window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
+
+            var reqAnimFrame = window.mozRequestAnimationFrame    ||
+                           window.webkitRequestAnimationFrame ||
+                           window.msRequestAnimationFrame     ||
+                           window.onRequestAnimationFrame
+                           ;
+            
+            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+
+
 
             function init(){
-                console.log("we are in init");
-                myvideo = document.getElementById("thevideo");
+
+        //-----LOAD USER VIDEO INPUT-----//
+
+                //console.log("Init!");
+                myvideo = document.getElementById("videoOfMe");
 
                 if (navigator.getUserMedia) {
                     console.log("in navigator.getUserMedia");
@@ -100,7 +113,14 @@
                         });
                 }
 
+        //-----CANVAS------//
+
                 canvas = document.getElementById('mycanvas');
+                context = canvas.getContext('2d');
+                //get size of canvas
+                //console.log("left:" + canvasRect.left + " top:" + canvasRect.top );
+
+                // User presses mouse to draw
                 canvas.addEventListener('mousedown', function() {
                     mousePress = true;
                 });
@@ -111,29 +131,33 @@
 
                 canvas.addEventListener('mousemove', function(e){
                     if(mousePress){
-                        console.log(e)
-                        x = e.clientX;
-                        y = e.clientY;
+                        canvasRect = canvas.getBoundingClientRect();
+
+                        //console.log(e);
+                        x = e.clientX - canvasRect.left;
+                        y = e.clientY - canvasRect.top;
+                        console.log("x: " + x + " y:" + y);
                         points.push({x: x, y: y});
                    }
                  });
 
-                context = canvas.getContext('2d');
-
                 function draw() {
+                    //load my video into canvas
                     context.drawImage(myvideo, 0, 0);
                     //console.log(canvas.toDataURL());
 
                     for (var i = 0; i < points.length; i++) {
                         context.beginPath();
-                        context.arc(points[i].x, points[i].y, 10, 0, 2 * Math.PI, false);
+                        context.arc(points[i].x, points[i].y, 5, 0, 2 * Math.PI, false);
+                        context.fillStyle = color;
                         context.fill();
-                        //context.fillRect(points[i].x, points[i].y, 20, 20);
                     }
                     reqAnimFrame(draw);
                 }
 
                 draw();
+
+        //------SEND-----//
             }
 
             
@@ -162,8 +186,9 @@
         </header>
 
         <div id="drawbox">
-            <video id="thevideo" height="500" width="667"></video>
-            <canvas id="mycanvas" height="500" width="667"/>
+            <video id="videoOfMe" height="480" width="640"></video>
+            <video id="videoOfPartner" height="480" width="640"></video>
+            <canvas id="mycanvas" height="480" width="640"/>
         </div><!--close drawbox-->
 
         <div class="button">
