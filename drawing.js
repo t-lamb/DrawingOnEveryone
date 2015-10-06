@@ -59,7 +59,22 @@ io.on('connection', function(socket){
           //io.emit( haha , pack.stream );
         }
         else if(userList[i].partnerId == "none"){
-          socket.emit('deny',true);
+          io.emit('deny',true);
+        }
+      }
+
+    });
+
+    socket.on('result',function(pack){
+      console.log("get still");
+
+      for(i=0; i < userList.length; i++ ){
+        if( userList[i].id == pack.token && userList[i].partnerId != "none" ){
+          io.emit( userList[i].partnerId + "still" , pack.still );
+          console.log("passing still");
+        }
+        else if(userList[i].partnerId == "none"){
+          io.emit('deny',true);
         }
       }
 
@@ -82,6 +97,13 @@ function newArtist(NewUserID){
 
     var lostAddress = null;
     var leftPosition = 0;
+
+    for(i=0; i<userList.length; i++){
+       //clear_Junk!
+     if(userList[i].id == "Free_Pos" && userList[i].partnerId == "none"){
+      userList.splice(i,1);
+     }
+    }
 
     for(i=0; i<userList.length; i++){
       if(userList[i].id === "Free_Pos"){
@@ -168,11 +190,13 @@ function lostArtist(theLostID){
   console.log(theLostID);
 
    for(i=0; i < userList.length; i++){
-       if( theLostID === userList[i].id ){
+       if( theLostID == userList[i].id ){
          userList[i].id = "Free_Pos";
          }
+     }
 
-       if( theLostID === userList[i].partnerId){
+    for(i=0; i < userList.length; i++){
+     if( theLostID == userList[i].partnerId){
         userList[i].partnerId = "none";
        }
      }

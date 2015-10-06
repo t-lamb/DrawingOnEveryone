@@ -105,6 +105,11 @@ header {
 .button:hover {
 	background-color: #2dc0bd;
 }
-#videoOfMe {
+.invisiblebox {
 	display: none;
+}
+#gallery1{
+	padding: 1rem 0;
+	width: 320px;
+	height: 240px;
 }

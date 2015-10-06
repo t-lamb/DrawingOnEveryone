@@ -15,50 +15,59 @@
 
         window.addEventListener('load',function(){
 
-            //init
-            setTimeout(function(){
-                myToken = socket.id;
-                socketReady = true;
+                //init
+                setTimeout(function(){
+                    myToken = socket.id;
+                    socketReady = true;
 
-                //Token_Ready!!_Then_Setup_Socket_KeyWord//
-                socket.on( myToken, function(stream){
-                console.log("Stream is here");
-                yourVideo.src = stream;
-                });
+                    //Token_Ready!!_Then_Setup_Socket_KeyWord//
+                    socket.on( myToken, function(stream){
+                    console.log("Stream is here");
+                    yourVideo.src = stream;
+                    });
 
-            },100);
+                    socket.on( myToken + "still", function(still){
+                        console.log("Still is here");
+                        var currentgallery = document.getElementById("gallery1");
+                        currentgallery.src = still;
+                    });
 
-            testBox = document.getElementById('testBox');
+                },50);
+
+                testBox = document.getElementById('testBox');
 
 
-        });
+            });
 
-        //registration_for_server_position
-        socket.on('testType', function(){
-            socket.emit('newArtist','');
-        });
+            //registration_for_server_position
+            socket.on('testType', function(){
+                socket.emit('newArtist','');
+            });
 
-        socket.on('deny', function(){
-            console.log("You don't a friend!!!");
-        });
+            socket.on('deny', function(){
+                console.log("You don't a friend!!!");
+            });
 
-        //receive_data_stream
+            //receive_data_stream
 
-        // socket.on( "test", function(stream){
-        //     testBox.innerHTML += stream;
-        // });
+            // socket.on( "test", function(stream){
+            //     testBox.innerHTML += stream;
+            // });
   
         </script>
 
         <script type="text/javascript">
 
-            var context;
-            var canvas;
+            var context1;
+            var canvas1;
+            var context2;
+            var canvas2;
             var myvideo;
             var points = [];
             var mousePress = false;
             var canvasRect;
             var imageScreen;
+            var sendPic;
             var px = 0;
             var py = 0; 
 
@@ -104,48 +113,53 @@
 
         //-----CANVAS------//
 
-                canvas = document.getElementById('mycanvas');
-                context = canvas.getContext('2d');
+                canvas1 = document.getElementById('canvas1');
+                context1 = canvas1.getContext('2d');
+                canvas2 = document.getElementById('canvas2');
+                context2 = canvas2.getContext('2d');
+                //context2.drawImage(wait.jpg, 0, 0)
 
                 // User presses mouse to draw
-                canvas.addEventListener('mousedown', function() {
+                canvas2.addEventListener('mousedown', function() {
                     mousePress = true;
                 });
 
-                canvas.addEventListener('mouseup', function(){
+                canvas2.addEventListener('mouseup', function(){
                     mousePress = false;
                 });
 
-                canvas.addEventListener('mousemove', function(e){
+                canvas2.addEventListener('mousemove', function(e){
                     if(mousePress){
-                        canvasRect = canvas.getBoundingClientRect();
+                        canvasRect = canvas2.getBoundingClientRect();
 
                         //console.log(e);
                         x = e.clientX - canvasRect.left;
                         y = e.clientY - canvasRect.top;
                         console.log("x: " + x + " y:" + y);
                         points.push({x: x, y: y});
-                   }
+                    }
                  });
 
                 function draw() {
 
                     //load my video into canvas
-                    context.drawImage(myvideo, 0, 0);
+                    context1.drawImage(myvideo, 0, 0);
                     //var candata = canvas.toDataURL('image/webp', 1);
                     //console.log(candata);
+
+                    context2.drawImage(yourVideo, 0, 0);
 
 
                     for (var i = 0; i < points.length; i++) {
 
-                        context.beginPath();
-                        //context.strokeStyle = color;
-                        //context.moveTo(px, py);
-                        //context.lineTo(points[i].x,points[i].y);
-                        //context.stroke();
-                        context.arc(points[i].x, points[i].y, 5, 0, 2 * Math.PI, false);
-                        context.fillStyle = color;
-                        context.fill();
+                        context2.beginPath();
+                        //context2.strokeStyle = color;
+                        //context2.moveTo(px, py);
+                        //context2.lineTo(points[i].x,points[i].y);
+                        //context2.stroke();
+                        context2.arc(points[i].x, points[i].y, 5, 0, 2 * Math.PI, false);
+                        context2.fillStyle = color;
+                        context2.fill();
 
                         //px = points[i].x;
                         //py = points[i].y;
@@ -153,7 +167,7 @@
 
                     if(socketReady){
 
-                        myStream = canvas.toDataURL('image/webp', 1);
+                        myStream = canvas1.toDataURL('image/webp', 0.05);
 
                             dataPack = {
                                 token : myToken,
@@ -171,15 +185,25 @@
 
                 draw();
 
-
                 imageScreen = document.getElementById('yourVideo');
 
+
+                sendPic = document.getElementById('sendButton');
+
+                sendPic.addEventListener('click', function(){
+
+                    var yourStream = canvas2.toDataURL('image/jpeg', 1);
+
+                    stillPack = {
+                        token : socket.id,
+                        still : yourStream 
+                    }
+
+                    socket.emit('result', stillPack );
+
+                });
+
             }
-
-            
-
-
-
 
             window.addEventListener('load', init);
         </script>
@@ -201,14 +225,19 @@
             <h1>Drawing on Everyone</h1>
         </header>
 
-        <div id="drawbox">
+        <div class="invisiblebox">
             <video id="videoOfMe" height="480" width="640"></video>
-            <canvas id="mycanvas" height="480" width="640"/>
+            <canvas id="canvas1" height="480" width="640"/>
+        </div>
+
+        <div id="drawbox">
+            <img src="" id="yourVideo" height="480" width="640" style="display:none;"/>
+            <canvas id="canvas2" height="480" width="640"/>
+            
+
         </div><!--close drawbox-->
 
-        <img src="" id="yourVideo" height="480" width="640"/>
-
-        <div class="button">
+        <div id="sendButton" class="button">
             Send
         </div><!--close button-->
 
@@ -217,6 +246,7 @@
 
             <ul id="gallerylist">
                 <li class="mypics">
+                    <img src="" id="gallery1"/>
                 </li>
             </ul>
         </div><!--close gallery-->
