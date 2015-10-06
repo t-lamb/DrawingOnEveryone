@@ -7,61 +7,47 @@
         <script src="script/socket.io.js"></script>
 
         <script>
-        // var socket = io();
-        // var myToken, myStream;
-        // var dataPack = {};
-        // var socketReady = false;
-        // var testBox;
+        var socket = io();
+        var myToken, myStream;
+        var dataPack = {};
+        var socketReady = false;
+        var testBox;
 
-        // window.addEventListener('load',function(){
+        window.addEventListener('load',function(){
 
-        //     //init
-        //     setTimeout(function(){
-        //         myToken = socket.id;
-        //         socketReady = true;
+            //init
+            setTimeout(function(){
+                myToken = socket.id;
+                socketReady = true;
 
-        //         //Token_Ready!!_Then_Setup_Socket_KeyWord//
-        //         socket.on( myToken, function(stream){
-        //         //alert("hi");
-        //         testBox.innerHTML += stream;
-        //         });
+                //Token_Ready!!_Then_Setup_Socket_KeyWord//
+                socket.on( myToken, function(stream){
+                console.log("Stream is here");
+                yourVideo.src = stream;
+                });
 
-        //     },100);
+            },100);
 
-        //     testBox = document.getElementById('testBox');
+            testBox = document.getElementById('testBox');
 
 
+        });
+
+        //registration_for_server_position
+        socket.on('testType', function(){
+            socket.emit('newArtist','');
+        });
+
+        socket.on('deny', function(){
+            console.log("You don't a friend!!!");
+        });
+
+        //receive_data_stream
+
+        // socket.on( "test", function(stream){
+        //     testBox.innerHTML += stream;
         // });
-
-        // //registration_for_server_position
-        // socket.on('testType', function(){
-        //     socket.emit('newArtist','');
-        // });
-
-        // //receive_data_stream
-
-        // // socket.on( "test", function(stream){
-        // //     testBox.innerHTML += stream;
-        // // });
-
-
-        // document.onkeydown=function(event){
-        //     if(socketReady){
-        //             var e = event || window.event || arguments.callee.caller.arguments[0];
-        //             myStream = e.keyCode;
-
-        //             dataPack = {
-        //                 token : myToken,
-        //                 stream : myStream
-        //             }
-
-        //             socket.emit('frame', dataPack);
-
-        //             console.log(dataPack);
-
-        //         }
-        //     }; 
-        
+  
         </script>
 
         <script type="text/javascript">
@@ -72,13 +58,14 @@
             var points = [];
             var mousePress = false;
             var canvasRect;
+            var imageScreen;
 
         //set colors
             var r = 255 * Math.random();
             var g = 255 * Math.random();
             var b = 255 * Math.random();
             var color = "rgb(" + Math.floor(r) + "," + Math.floor(g) + "," + Math.floor(b) + ")";
-            console.log("Color: " + color);
+            //console.log("Color: " + color);
 
         // shim for cross-browser functionality
             window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
@@ -117,8 +104,6 @@
 
                 canvas = document.getElementById('mycanvas');
                 context = canvas.getContext('2d');
-                //get size of canvas
-                //console.log("left:" + canvasRect.left + " top:" + canvasRect.top );
 
                 // User presses mouse to draw
                 canvas.addEventListener('mousedown', function() {
@@ -142,9 +127,15 @@
                  });
 
                 function draw() {
+
                     //load my video into canvas
                     context.drawImage(myvideo, 0, 0);
-                    //console.log(canvas.toDataURL());
+                    //var candata = canvas.toDataURL('image/webp', 1);
+                    //console.log(candata);
+
+                    //load partner's video into my canvas
+                    //context.drawImage(partnervideo, 0, 0);
+
 
                     for (var i = 0; i < points.length; i++) {
                         context.beginPath();
@@ -152,12 +143,30 @@
                         context.fillStyle = color;
                         context.fill();
                     }
+
+                    if(socketReady){
+
+                        myStream = canvas.toDataURL('image/webp', 1);
+
+                            dataPack = {
+                                token : myToken,
+                                stream : myStream
+                            }
+
+                            socket.emit('frame', dataPack);
+
+                            //console.log(dataPack);
+
+                     }
+
                     reqAnimFrame(draw);
                 }
 
                 draw();
 
-        //------SEND-----//
+
+                imageScreen = document.getElementById('yourVideo');
+
             }
 
             
@@ -187,9 +196,10 @@
 
         <div id="drawbox">
             <video id="videoOfMe" height="480" width="640"></video>
-            <video id="videoOfPartner" height="480" width="640"></video>
             <canvas id="mycanvas" height="480" width="640"/>
         </div><!--close drawbox-->
+
+        <img src="" id="yourVideo" height="480" width="640"/>
 
         <div class="button">
             Send

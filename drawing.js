@@ -54,8 +54,12 @@ io.on('connection', function(socket){
         if( userList[i].id == pack.token && userList[i].partnerId != "none" ){
            //console.log('-FIND!-');
            //console.log(userList[i].partnerId);
+            //console.log(pack.stream);
           io.emit( userList[i].partnerId , pack.stream );
           //io.emit( haha , pack.stream );
+        }
+        else if(userList[i].partnerId == "none"){
+          socket.emit('deny',true);
         }
       }
 
