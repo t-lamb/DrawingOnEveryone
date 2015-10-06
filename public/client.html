@@ -47,12 +47,6 @@
             socket.on('deny', function(){
                 console.log("You don't a friend!!!");
             });
-
-            //receive_data_stream
-
-            // socket.on( "test", function(stream){
-            //     testBox.innerHTML += stream;
-            // });
   
         </script>
 
@@ -150,19 +144,15 @@
                     context2.drawImage(yourVideo, 0, 0);
 
 
-                    for (var i = 0; i < points.length; i++) {
+                    for (var i = 1; i < points.length; i++) {
 
                         context2.beginPath();
-                        //context2.strokeStyle = color;
-                        //context2.moveTo(px, py);
-                        //context2.lineTo(points[i].x,points[i].y);
-                        //context2.stroke();
-                        context2.arc(points[i].x, points[i].y, 5, 0, 2 * Math.PI, false);
-                        context2.fillStyle = color;
-                        context2.fill();
+                        context2.strokeStyle = color;
+                        context2.moveTo(points[i-1].x,points[i-1].y);
+                        context2.lineTo(points[i].x,points[i].y);
+                        context2.stroke();
+                        context2.lineWidth = 8;
 
-                        //px = points[i].x;
-                        //py = points[i].y;
                     }
 
                     if(socketReady){
@@ -212,45 +202,32 @@
 
     <body>
 
-        <!--div>
-        You Can Remove "testBox" div After Testing
-        For Testing: Type AnyTing Runtime
-        Rubin
-        <div-->
-        <!--<div id = "testBox" >
-        </div>-->
-
-        <div class="main">
         <header>
             <h1>Drawing on Everyone</h1>
         </header>
 
-        <div class="invisiblebox">
-            <video id="videoOfMe" height="480" width="640"></video>
-            <canvas id="canvas1" height="480" width="640"/>
-        </div>
+        <div class="mycanvases">
 
-        <div id="drawbox">
-            <img src="" id="yourVideo" height="480" width="640" style="display:none;"/>
-            <canvas id="canvas2" height="480" width="640"/>
-            
+            <div class="invisiblebox">
+                <video id="videoOfMe" height="480" width="640"></video>
+                <canvas id="canvas1" height="480" width="640"/>
+            </div>
 
-        </div><!--close drawbox-->
+            <div id="drawbox">
+                <img src="" id="yourVideo" height="480" width="640" style="display:none;"/>
+                <canvas id="canvas2" height="480" width="640"/>            
+            </div><!--close drawbox-->
 
-        <div id="sendButton" class="button">
-            Send
-        </div><!--close button-->
+            <div id="sendButton" class="button">
+                Send
+            </div><!--close button-->
+
+        </div><!--close mycanvases-->
 
         <div id="gallery">
-            <h2>Drawings on me</h2>
-
-            <ul id="gallerylist">
-                <li class="mypics">
-                    <img src="" id="gallery1"/>
-                </li>
-            </ul>
+            <h2>Drawing on me (inbox)</h2>
+            <img src="" id="gallery1"/>
         </div><!--close gallery-->
-    </div><!--close main-->
 
     </body>
 </html>

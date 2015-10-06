@@ -54,8 +54,6 @@ table {
 colors:
 black: 2b2b2d;
 white: #fbfbfd;
-dark blue: #393952;
-less dark blue: #4a4a63;
 lighter dark blue: #5a6384;
 teal: #2dc0bd;
 */
@@ -64,25 +62,23 @@ body {
 	font-family: 'Gochi Hand', sans-serif;
 	font-size: 1.5rem;
 	background-color: #fbfbfd;
-}
-.main{
-	padding: 0 2rem;
+	padding: 0 0 0 2rem;
 }
 h1 {
 	font-size: 2.5rem;
-}
-p {
-
 }
 header {
 	color: #2b2b2d;
 	padding: 1rem 0;
 }
-
-#drawbox {
-
+.mycanvases {
+	display: inline;
+	float: left;
+	padding: 0 4% 0 0;
 }
-
+.invisiblebox {
+	display: none;
+}
 .button {
 	border: none;
 	color: inherit;
@@ -100,13 +96,14 @@ header {
 	background-color: #4762B2;
 	font-size: 1.25rem;
 	width: 10rem;
-
 }
 .button:hover {
 	background-color: #2dc0bd;
 }
-.invisiblebox {
-	display: none;
+#gallery {
+	display: inline;
+	float: left;
+	padding: 2rem 0 0;
 }
 #gallery1{
 	padding: 1rem 0;
