@@ -7,7 +7,7 @@ var io = require('socket.io')(http);
 http.listen(8000,function(){
 
   console.log('Creating Wormholes');
-	console.log("hi! 8000");
+  console.log("hi! 8000");
 
 });
 
@@ -116,11 +116,16 @@ function newArtist(NewUserID){
 
             break;
           }
+     //New----//
+          else{
 
            artistObject = {
             id : NewUserID,
             partnerId : "none"
            }
+
+         }
+
         }
       }
 
@@ -130,7 +135,21 @@ function newArtist(NewUserID){
     }
     else{
     userList[lostAddress].id = NewUserID;
-    }
+    for(i=0; i < userList.length; i++ ){
+          if( userList[i].partnerId == "none" ){
+
+            userList[i].partnerId = NewUserID;
+
+            artistObject = {
+               id : NewUserID,
+               partnerId : userList[i].id
+            }
+
+            break;
+          }
+        }
+      }
+      //New------//
 
     //-------alerts--------//
     console.log("New_Artist---------------");
@@ -138,6 +157,8 @@ function newArtist(NewUserID){
     console.log("clientCount " + clientCount);
 
 }
+
+
 
 //Lost
 
